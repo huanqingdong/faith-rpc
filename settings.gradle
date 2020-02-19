@@ -1,0 +1,8 @@
+rootProject.name = 'faith-rpc'
+include 'faith-rpc-common'
+include 'faith-rpc-protocol'
+include 'faith-rpc-transport'
+include 'faith-rpc-server'
+include 'faith-rpc-client'
+include 'faith-rpc-codec'
+
