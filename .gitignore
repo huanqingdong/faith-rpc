@@ -1,14 +1,3 @@
 # Project exclude paths
 /.gradle/
-/build/
-/faith-rpc-client/build/
-/faith-rpc-codec/build/
-/faith-rpc-codec/build/classes/java/main/
-/faith-rpc-codec/build/classes/java/test/
-/faith-rpc-common/build/
-/faith-rpc-common/build/classes/java/main/
-/faith-rpc-common/build/classes/java/test/
-/faith-rpc-protocol/build/
-/faith-rpc-protocol/build/classes/java/main/
-/faith-rpc-server/build/
-/faith-rpc-transport/build/
+build

@@ -5,4 +5,5 @@ include 'faith-rpc-transport'
 include 'faith-rpc-server'
 include 'faith-rpc-client'
 include 'faith-rpc-codec'
+include 'faith-rpc-example'
 

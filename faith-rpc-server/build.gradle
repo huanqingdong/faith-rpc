@@ -12,5 +12,11 @@ repositories {
 }
 
 dependencies {
+    compile project(':faith-rpc-protocol')
+    compile project(':faith-rpc-codec')
+    compile project(':faith-rpc-transport')
+    compile project(':faith-rpc-common')
+    compile 'commons-io:commons-io'
+
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }

@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group 'tech.nosql'
@@ -7,13 +8,8 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    compile project(':faith-rpc-protocol')
-    compile('commons-io:commons-io')
-    compile('org.eclipse.jetty:jetty-servlet')
+    compile project(':faith-rpc-client')
+    compile project(':faith-rpc-server')
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
