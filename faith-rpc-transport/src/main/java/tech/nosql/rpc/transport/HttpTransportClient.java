@@ -21,23 +21,28 @@ public class HttpTransportClient implements TransportClient {
     }
 
     @Override
-    public InputStream write(InputStream data) {
+    public byte[] write(byte[] data) {
         try {
-            HttpURLConnection httpConnection = (HttpURLConnection)new URL(url).openConnection();
+            HttpURLConnection httpConnection = (HttpURLConnection) new URL(url).openConnection();
             httpConnection.setDoInput(true);
             httpConnection.setDoOutput(true);
             httpConnection.setUseCaches(false);
             httpConnection.setRequestMethod("POST");
 
             httpConnection.connect();
-            IOUtils.copy(data,httpConnection.getOutputStream());
+            httpConnection.getOutputStream().write(data);
+            // IOUtils.copy(data,httpConnection.getOutputStream());
 
             int responseCode = httpConnection.getResponseCode();
-            if(responseCode==HttpURLConnection.HTTP_OK){
-                return httpConnection.getInputStream();
-            }else {
-                return httpConnection.getErrorStream();
+
+            InputStream respIps;
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                respIps = httpConnection.getInputStream();
+            } else {
+                respIps = httpConnection.getErrorStream();
             }
+
+            return IOUtils.readFully(respIps, respIps.available());
 
         } catch (IOException e) {
             throw new IllegalStateException(e);

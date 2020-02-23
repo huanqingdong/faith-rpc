@@ -1,8 +1,8 @@
 package tech.nosql.rpc.client;
 
 import lombok.extern.slf4j.Slf4j;
+import tech.nosql.rpc.common.ReflectionUtils;
 import tech.nosql.rpc.protocol.Peer;
-import tech.nosql.rpc.transport.HttpTransportClient;
 import tech.nosql.rpc.transport.TransportClient;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class RandomTransportSelector implements TransportSelector {
         final int cnt = Math.max(count, 1);
         peers.forEach((p) -> {
             for (int i = 0; i < cnt; i++) {
-                TransportClient client = new HttpTransportClient();
+                TransportClient client = ReflectionUtils.newInstance(transportClientClass);
                 client.connect(p);
                 clients.add(client);
             }

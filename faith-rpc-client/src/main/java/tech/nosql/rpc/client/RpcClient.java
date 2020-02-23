@@ -1,6 +1,5 @@
 package tech.nosql.rpc.client;
 
-import org.apache.commons.io.IOUtils;
 import tech.nosql.rpc.codec.Decoder;
 import tech.nosql.rpc.codec.Encoder;
 import tech.nosql.rpc.common.ReflectionUtils;
@@ -9,8 +8,6 @@ import tech.nosql.rpc.protocol.Response;
 import tech.nosql.rpc.protocol.ServiceDescriptor;
 import tech.nosql.rpc.transport.TransportClient;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -51,8 +48,8 @@ public class RpcClient {
                             request.setServiceDescriptor(ServiceDescriptor.from(clazz, method));
                             request.setParameters(args);
                             byte[] bytes = encoder.encode(request);
-                            InputStream inputStream = client.write(new ByteArrayInputStream(bytes));
-                            Response response = decoder.decode(IOUtils.readFully(inputStream, inputStream.available()), Response.class);
+                            byte[] respBytes= client.write(bytes);
+                            Response response = decoder.decode(respBytes, Response.class);
                             if (response == null || response.getCode() != 0) {
                                 throw new IllegalStateException("调用异常:" + response);
                             }
@@ -65,5 +62,10 @@ public class RpcClient {
                         }
                     }
                 });
+    }
+
+
+    public void close(){
+        this.selector.close();
     }
 }

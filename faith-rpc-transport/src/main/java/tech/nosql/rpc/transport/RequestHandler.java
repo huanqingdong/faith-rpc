@@ -1,8 +1,5 @@
 package tech.nosql.rpc.transport;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-
 /**
  * 处理请求
  *
@@ -10,6 +7,6 @@ import java.io.OutputStream;
  */
 public interface RequestHandler {
 
-    void onRequest(InputStream receive, OutputStream response);
+    byte[] onRequest(byte[] receive);
 
 }
